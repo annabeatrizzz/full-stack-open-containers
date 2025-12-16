@@ -1,10 +1,18 @@
-const mongoose = require('mongoose')
-const Todo = require('./models/Todo')
-const { MONGO_URL } = require('../util/config')
+const express = require('express');
+const router = express.Router();
 
-if (MONGO_URL && !mongoose.connection.readyState) mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+const configs = require('../util/config')
 
+let visits = 0
 
-module.exports = {
-  Todo
-}
+/* GET index data. */
+router.get('/', async (req, res) => {
+  visits++
+
+  res.send({
+    ...configs,
+    visits
+  });
+});
+
+module.exports = router;
