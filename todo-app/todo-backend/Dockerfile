@@ -1,9 +1,3 @@
-FROM node:20
+FROM mongo
 
-WORKDIR /usr/src/app
-
-COPY . .
-
-RUN npm install
-
-CMD DEBUG=playground:* npm start
+COPY ./mongo-init.js /docker-entrypoint-initdb.d/
